@@ -1,0 +1,12 @@
+[Unit]
+Description=Pozyx Serial
+After=multi-user.target
+
+[Service]
+Type=simple
+User=murat
+ExecStart=/usr/bin/python /home/murat/src/pozyx/pozyx_serial.py
+Restart=on-abort
+
+[Install]
+WantedBy=multi-user.target

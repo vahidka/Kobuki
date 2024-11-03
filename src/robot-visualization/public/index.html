@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Robot Map Visualization</title>
+<link rel="icon" type="image/png" href="robot.png">
+<script src="/socket.io/socket.io.js"></script>
+<script src="script.js" defer></script>
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+    <div id="content">
+        <div id="sidebar">
+            <div class="logo">
+                <img src="kobuki.jpg" alt="Kobuki Logo">
+                <span class="logo-text">SWARM ROBOT CONTROL PLATFORM</span>
+            </div>
+            <div id="robotSelection">
+                <h2>Select Robot</h2>
+                <select id="robotSelector">
+                    <option value="1">Robot 1</option>
+                    <option value="2">Robot 2</option>
+                    <option value="3">Robot 3</option>
+                    <option value="4">Robot 4</option>
+                    <option value="5">Robot 5</option>
+                </select>
+            </div>
+        </div>
+        <div id="inputs">
+            <div id="controls">
+                Target:
+                <input type="number" id="targetX" placeholder="X">
+                <input type="number" id="targetY" placeholder="Y">
+                <button id="start">Start</button>
+                <button id="stop">Stop</button>
+            </div>
+            <div class="line-break"></div>
+            <div id="movement">
+                Speed:<input type="number" id="longitudinal_velocity" placeholder="Longitudinal">
+                <input type="number" id="rotational_velocity" placeholder="Rotational">
+                <button id="move">Move</button>
+                <button id="stop2">Stop</button>
+            </div>
+            <br><br>
+            <div id="robotInfo" class="infoContainer">
+                <h2>Robot Information</h2>
+                <div id="modeContainer" class="modeContainer">
+                    <div id="mode-0" class="mode">FREE MODE</div>
+                    <div id="mode-1" class="mode">GO TO GOAL MODE</div>
+                    <div id="mode-2" class="mode">WALL FOLLOWING MODE</div>
+                </div>
+                <div id="stateContainer" class="stateContainer">
+                    <div id="state-0" class="state">ADJUST HEADING</div>
+                    <div id="state-1" class="state">GO STRAIGHT</div>
+                    <div id="state-2" class="state">GOAL ACHIEVED</div>
+                </div>
+                <div id="posContainer" class="posContainer">
+                    <br>
+                    <div id="pozyxPos" class="pos">Pozyx: (0, 0, 0)</div>
+                    <br>
+                    <div id="robotPos" class="pos">Odometry: (0, 0, 0)</div>
+                </div>
+                <div id="sensorContainer" class="sensorContainer">
+                    <h3>Bumper Sensors</h3>
+                    <img src="kobuki.jpg" alt="Kobuki Robot" id="kobukiImageBumper">
+                    <div id="bumperLeft" class="sensor"></div>
+                    <div id="bumperCenter" class="sensor"></div>
+                    <div id="bumperRight" class="sensor"></div>
+                    <br><br><br><br><br>
+                    <h3>Cliff Sensors</h3>
+                    <img src="kobuki.jpg" alt="Kobuki Robot" id="kobukiImageCliff">
+                    <div id="cliffLeft" class="sensor"></div>
+                    <div id="cliffCenter" class="sensor"></div>
+                    <div id="cliffRight" class="sensor"></div>
+                    <br><br><br><br><br><br><br>
+                </div>
+            </div>
+        </div>
+        <div id="mapContainer">
+            <canvas id="robotMap" width="900" height="900"></canvas>
+            <img id="robot1" class="robot" src="robot.png" alt="Robot">
+            <img id="robot2" class="robot" src="robot.png" alt="Robot">
+            <img id="robot3" class="robot" src="robot.png" alt="Robot">
+            <img id="robot4" class="robot" src="robot.png" alt="Robot">
+            <img id="robot5" class="robot" src="robot.png" alt="Robot">
+            <svg class="targetIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                <path fill="#0000FF" d="M12 2c-4.418 0-8 3.582-8 8 0 6.064 8 14 8 14s8-7.936 8-14c0-4.418-3.582-8-8-8zm0 11.75c-1.448 0-2.625-1.177-2.625-2.625s1.177-2.625 2.625-2.625 2.625 1.177 2.625 2.625-1.177 2.625-2.625 2.625z"/>
+            </svg>
+        </div>
+    </div>
+
+</body>
+</html>

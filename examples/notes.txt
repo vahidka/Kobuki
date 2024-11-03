@@ -1,0 +1,5 @@
+65x45
+r=20
+
+1. go 33sn, return 53sn
+2. go 25sn, return 36sn

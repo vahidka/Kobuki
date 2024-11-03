@@ -1,0 +1,289 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f5f5f5; /* grey background */
+  height: 100vh;
+  display: flex;
+  justify-content: left;
+  align-items: left;
+  flex-direction: column;
+}
+
+#content {
+  display: flex;
+  justify-content: left;
+  align-items: flex-start;
+  gap: 20px; /* Adds space between map and info div */
+  margin-top: 10px;
+  flex-flow: row wrap;
+  margin-left: 300px; /* Adjust based on sidebar width */
+}
+
+#sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 235px;
+  height: 100%;
+  background-color: #f4f4f4;
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  font-family: Helvetica;
+}
+
+#robotSelection {
+  margin-top: 20px;
+}
+
+#robotSelection h2 {
+  margin-bottom: 10px;
+}
+
+#robotSelector {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 20px;
+}
+
+#mapContainer {
+  position: relative;
+  width: 900px;
+  height: 900px;
+  border: 1px solid #000;
+  margin-bottom: 20px;
+}
+
+#robotMap {
+  border: 1px solid black;
+}
+
+.robot {
+  position: absolute; /* Position the robot image absolutely within the container */
+  transform: translate(-50%, -50%); /* Center the image */
+}
+
+#robotInfo {
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Add a shadow effect */
+  width: 370px; /* Set a fixed width for the box */
+  margin-right: 20px; /* Add some space to the right of the map */
+  font-family: Helvetica;
+}
+
+.infoContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.modeContainer,
+.stateContainer {
+  display: flex;
+  justify-content: center; /* Center vertically */
+  margin-top: 5px;
+  font-size: 14px;
+  font-family: Comic Sans MS;
+  text-align: center;
+}
+
+.mode,
+.state {
+  padding: 5px 10px;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  cursor: pointer; /* Add a cursor pointer for better UX */
+}
+
+.pos {
+  text-align: left;
+  justify-content: left;
+  align-items: left;
+  font-size: 15px;
+  font-family: Comic Sans MS;
+}
+
+.line-break {
+  width: 100%;
+}
+
+.active {
+  background-color: #28a745; /* Green color for active mode/state */
+  color: #fff; /* White text color for active mode/state */
+}
+
+.sensorContainer {
+  position: relative; /* Position the container relative to the body */
+  margin-top: 10px;
+}
+
+.sensorContainer h3 {
+  margin: 10px 0; /* Add margin above and below the sensor headings */
+}
+
+#kobukiImageBumper {
+  position: absolute; /* Position the image absolutely within the container */
+  top: 40px;
+  left: 20px;
+}
+
+#kobukiImageCliff {
+  position: absolute; /* Position the image absolutely within the container */
+  top: 170px;
+  left: 20px;
+}
+
+.sensor {
+  position: absolute; /* Position the sensors absolutely within the container */
+  background-color: #0f0; /* Make the sensor elements transparent */
+  width: 20px; /* Adjust width as needed */
+  height: 20px; /* Adjust height as needed */
+  border-radius: 50%;
+}
+
+#bumperLeft {
+  top: 70px; /* Adjust top position as needed */
+  left: 20px; /* Adjust left position as needed */
+}
+
+#bumperCenter {
+  top: 40px; /* Adjust top position as needed */
+  left: 55px; /* Adjust left position as needed */
+}
+
+#bumperRight {
+  top: 70px; /* Adjust top position as needed */
+  left: 90px; /* Adjust left position as needed */
+}
+
+#cliffLeft {
+  top: 200px; /* Adjust top position as needed */
+  left: 20px; /* Adjust left position as needed */
+}
+
+#cliffCenter {
+  top: 170px; /* Adjust top position as needed */
+  left: 55px; /* Adjust left position as needed */
+}
+
+#cliffRight {
+  top: 200px; /* Adjust top position as needed */
+  left: 90px; /* Adjust left position as needed */
+}
+
+.pressed {
+  background-color: #f00; /* Red color for bumper sensor */
+}
+
+.released {
+  background-color: #0f0; /* Green color for cliff sensor */
+}
+
+.floor {
+  background-color: #0f0; /* Green color for cliff sensor */
+}
+
+.cliff {
+  background-color: #f00; /* Red color for bumper sensor */
+}
+
+#controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px; /* Adds space between each control item */
+  margin-top: 20px;
+}
+
+#movement {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px; /* Adds space between each control item */
+  margin-top: 20px;
+}
+
+input[type="number"] {
+  width: 80px; /* Adjust width as needed */
+  height: 40px; /* Adjust height to match the buttons, ensuring alignment */
+  padding: 0 12px;
+  border: 2px solid #ccc; /* Add a border to the input for better visual */
+  border-radius: 20px; /* Rounded corners for the input fields */
+  font-size: 15px; /* Increase font size for better readability */
+  line-height: 40px; /* Aligns text vertically */
+  text-align: center;
+}
+
+button {
+  min-width: 60px; /* Ensure the buttons have a minimum width */
+  height: 60px; /* Circular buttons */
+  padding: 0;
+  border-radius: 50%;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 60px; /* Align text for circular buttons */
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+button:active {
+  background-color: #004099;
+}
+
+button#move {
+  background-color: #28a745; /* Green color for the move button */
+}
+
+button#start {
+  background-color: #28a745; /* Green color for the start button */
+}
+
+button#stop {
+  background-color: #dc3545; /* Red color for the stop button */
+}
+
+button#stop2 {
+  background-color: #dc3545; /* Red color for the stop button */
+}
+
+button:hover {
+  transform: scale(1.1); /* Slightly enlarge the buttons on hover for a visual effect */
+}
+
+button:active {
+  transform: scale(0.9); /* Slightly shrink the buttons on press */
+}
+
+.targetIcon {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  transform: translate(-50%, -50%); /* Center the icon */
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px; /* Adjust the space between the logo and the text */
+}
+
+.logo-text {
+  font-size: 18px; /* Adjust the font size as needed */
+  font-weight: bold;
+  color: #333; /* Adjust the text color as needed */
+}
+
+.logo img {
+  width: 100%;
+  max-width: 30px; /* Adjust size as needed */
+  display: block;
+  margin: 10 auto 20px; /* Center the logo and add some margin below */
+}

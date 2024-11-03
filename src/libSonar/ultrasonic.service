@@ -1,0 +1,12 @@
+[Unit]
+Description=Ultrasonic GPIO
+After=multi-user.target
+
+[Service]
+Type=simple
+User=murat
+ExecStart=/usr/bin/python /home/murat/src/libSonar/ultrasonic.py
+Restart=on-abort
+
+[Install]
+WantedBy=multi-user.target

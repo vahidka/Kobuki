@@ -1,0 +1,119 @@
+optional: enable ssh connection on raspberry pi. Connect to raspberry via MobaXTerm or terraterm
+sudo raspi-config
+Select option 5 Interfacing Options:
+Select option P2 SSH, to activate SSH:
+Confirm with YES, to activate SSH:
+
+kobuki installation guide:
+https://kobuki.readthedocs.io/en/devel/software.html
+
+1. increase swap area:
+    https://pimylifeup.com/raspberry-pi-swap-file/
+sudo dphys-swapfile swapoff
+sudo nano /etc/dphys-swapfile
+CONF_SWAPSIZE=1024
+sudo dphys-swapfile setup
+sudo dphys-swapfile swapon
+sudo reboot
+
+2. install cmake
+
+sudo apt update && sudo apt upgrade
+sudo apt install cmake -y
+cmake --version
+
+3. install python3-venv
+
+sudo pip install virtualenv
+
+4. run the scripts from kobuki installation guide:
+
+mkdir kobuki && cd kobuki
+
+# a virtual environment launcher that will fetch build tools from pypi (colcon, vcstools)
+wget https://raw.githubusercontent.com/kobuki-base/kobuki_documentation/release/1.0.x/resources/venv.bash
+
+# custom build configuration options for eigen, sophus
+wget https://raw.githubusercontent.com/kobuki-base/kobuki_documentation/release/1.0.x/resources/colcon.meta
+
+# list of repositories to git clone
+wget https://raw.githubusercontent.com/kobuki-base/kobuki_documentation/release/1.0.x/resources/kobuki_standalone.repos
+
+source ./venv.bash
+
+mkdir src
+
+vcs import ./src < kobuki_standalone.repos
+
+colcon build --merge-install --cmake-args -DBUILD_TESTING=OFF
+
+deactivate
+
+wget https://raw.githubusercontent.com/kobuki-base/kobuki_ftdi/devel/60-kobuki.rules
+sudo cp 60-kobuki.rules /etc/udev/rules.d
+sudo service udev reload
+sudo service udev restart
+
+5. Try sample programs
+
+source ./venv.bash
+source ./install/setup.bash
+
+# who is your kobuki?
+kobuki-version-info
+
+# take kobuki for a test drive
+kobuki-simple-keyop
+
+
+DONE! Here are some example applications:
+https://kobuki.readthedocs.io/en/devel/applications.html
+
+6. Install nodejs and npm modules for web UI hosting
+
+sudo apt-get update
+sudo apt-get install -y ca-certificates curl gnupg
+sudo mkdir -p /etc/apt/keyrings
+curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
+NODE_MAJOR=20
+echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_MAJOR.x nodistro main" | sudo tee /etc/apt/sources.list.d/nodesource.list
+sudo apt-get update
+sudo apt-get install nodejs -y
+
+npm install express
+npm install mqtt
+npm install socket.io
+
+7. start webServer
+
+cd webServer
+node server.js
+
+8. Setup ultrasonic sensor circuit:
+    https://www.instructables.com/Distance-Sensing-With-Raspberry-Pi-and-HC-SR04/
+
+
+9. Install the prerequisites
+
+pip install pypozyx
+    Note: The most recent pyserial version, pyserial3.5b0, is not supported by the pypozyx library.
+    Please force this library to be on an older version larger than 3.0. Use for example “pip install pyserial==3.4”
+
+sudo apt-get install nlohmann-json3-dev
+pip3 install paho-mqtt
+
+sudo apt install -y mosquitto mosquitto-clients
+sudo systemctl enable mosquitto.service
+mosquitto -v
+mosquitto -c mosquitto.conf -v
+
+10. How to build this repo:
+
+. env.sh
+./bcmd
+
+11. Run the sensor python services:
+
+python pozyx_serial.pypi
+python ultrasonic.py
+    Note: Add .service files to /etc/systemd/system/ to run a Python Script as a Service in Raspberry Pi

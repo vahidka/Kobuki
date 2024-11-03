@@ -1,0 +1,4 @@
+source ~/kobuki/install/setup.bash
+export LD_LIBRARY_PATH=~/kobuki/install/lib
+g++  -I ~/kobuki/install/include -I ~/kobuki/install/include/eigen3 -L ~/kobuki/install/lib/ move.cpp ~/kobuki/install/lib/libkobuki_core.so ~/kobuki/install/lib/libecl_time.so.1.2.1 ~/kobuki/install/lib/libecl_exceptions.so.1.2.1 ~/kobuki/install/lib/libecl_geometry.so.1.2.1 ~/kobuki/install/lib/libecl_threads.so.1.2.1
+
